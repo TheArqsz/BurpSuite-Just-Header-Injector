@@ -1,0 +1,121 @@
+package com.arqsz.customheaderinjector.ui;
+
+import burp.api.montoya.ui.UserInterface;
+import com.arqsz.customheaderinjector.model.HeaderConfig;
+
+import javax.swing.*;
+import javax.swing.border.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import java.awt.*;
+
+public class HeaderRow extends JPanel {
+    private final HeaderConfig config;
+    private final Runnable onRemove;
+    private final Runnable onUpdate;
+    private final JTextField txtName;
+    private final Border defaultBorder;
+
+    public HeaderRow(UserInterface uiUtils, HeaderConfig config, Runnable onRemove,
+            Runnable onUpdate) {
+        this.config = config;
+        this.onRemove = onRemove;
+        this.onUpdate = onUpdate;
+
+        setLayout(new GridBagLayout());
+        setBorder(BorderFactory.createCompoundBorder(BorderFactory.createEmptyBorder(5, 10, 5, 10),
+                BorderFactory.createCompoundBorder(BorderFactory.createEtchedBorder(),
+                        BorderFactory.createEmptyBorder(8, 8, 8, 8))));
+
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.insets = new Insets(0, 5, 0, 5);
+
+        JCheckBox chk = new JCheckBox();
+        chk.setSelected(config.isEnabled());
+        chk.setOpaque(false);
+        chk.addActionListener(e -> {
+            config.setEnabled(chk.isSelected());
+            onUpdate.run();
+        });
+        c.gridx = 0;
+        c.weightx = 0.0;
+        add(chk, c);
+
+        txtName = new JTextField(config.getName(), 15);
+        defaultBorder = txtName.getBorder();
+
+        SimpleDocListener docListener = () -> {
+            config.setName(txtName.getText());
+            validateInput();
+            onUpdate.run();
+        };
+        txtName.getDocument().addDocumentListener(docListener);
+
+        c.gridx = 1;
+        c.weightx = 0.3;
+        add(txtName, c);
+
+        c.gridx = 2;
+        c.weightx = 0.0;
+        add(new JLabel(":"), c);
+
+        JTextField txtValue = new JTextField(config.getValue(), 15);
+        txtValue.getDocument().addDocumentListener((SimpleDocListener) () -> {
+            config.setValue(txtValue.getText());
+            onUpdate.run();
+        });
+        c.gridx = 3;
+        c.weightx = 0.7;
+        add(txtValue, c);
+
+        JButton btnRemove = new JButton("Remove");
+        btnRemove.setForeground(Color.RED);
+        btnRemove.setFont(btnRemove.getFont().deriveFont(Font.BOLD));
+        btnRemove.addActionListener(e -> onRemove.run());
+        c.gridx = 4;
+        c.weightx = 0.0;
+        add(btnRemove, c);
+
+        uiUtils.applyThemeToComponent(this);
+        setOpaque(false);
+        validateInput();
+    }
+
+    private void validateInput() {
+        Insets nameInset = defaultBorder.getBorderInsets(txtName);
+        Border errorBorder = new CompoundBorder(new MatteBorder(1, 1, 1, 1, Color.RED),
+                new EmptyBorder(nameInset.top - 1, nameInset.left - 1, nameInset.bottom - 1,
+                        nameInset.right - 1));
+        if (txtName.getText().isEmpty()) {
+            txtName.setBorder(errorBorder);
+            txtName.setToolTipText("Header name cannot be empty");
+        } else if (!HeaderConfig.NAME_PATTERN.matcher(txtName.getText()).matches()) {
+            txtName.setBorder(errorBorder);
+            txtName.setToolTipText("Invalid characters in header name");
+        } else {
+            txtName.setBorder(defaultBorder);
+            txtName.setToolTipText(null);
+        }
+    }
+
+    @FunctionalInterface
+    interface SimpleDocListener extends DocumentListener {
+        void update();
+
+        @Override
+        default void insertUpdate(DocumentEvent e) {
+            update();
+        }
+
+        @Override
+        default void removeUpdate(DocumentEvent e) {
+            update();
+        }
+
+        @Override
+        default void changedUpdate(DocumentEvent e) {
+            update();
+        }
+    }
+}
