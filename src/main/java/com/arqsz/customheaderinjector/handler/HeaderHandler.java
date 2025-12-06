@@ -11,7 +11,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class HeaderHandler implements HttpHandler {
 
     private final Scope scope;
-    private final List<HeaderConfig> configList = new CopyOnWriteArrayList<>();
+    private volatile List<HeaderConfig> configList = new CopyOnWriteArrayList<>();
 
     private volatile boolean globalEnabled = true;
     private volatile boolean scopeOnly = false;
@@ -73,7 +73,6 @@ public class HeaderHandler implements HttpHandler {
     }
     
     public void replaceConfigs(List<HeaderConfig> newConfigs) {
-        configList.clear();
-        configList.addAll(newConfigs);
+        this.configList = new CopyOnWriteArrayList<>(newConfigs);
     }
 }
