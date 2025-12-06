@@ -63,7 +63,6 @@ public class SettingsManager {
                         obj.optBoolean("e", true)
                     ));
                 }
-                // Atomic replacement
                 handler.replaceConfigs(newConfigs); 
             }
         } catch (Exception e) {
