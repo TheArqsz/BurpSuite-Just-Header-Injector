@@ -19,7 +19,7 @@ public class HeaderInjectorExtension implements BurpExtension {
         HeaderHandler handler = new HeaderHandler(api.scope());
         api.http().registerHttpHandler(handler);
 
-        SettingsManager settings = new SettingsManager(api.persistence().preferences(), handler);
+        SettingsManager settings = new SettingsManager(api.persistence().preferences(), handler, api.logging());
         settings.load();
 
         SwingUtilities.invokeLater(() -> {
