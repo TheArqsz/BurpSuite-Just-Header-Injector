@@ -31,19 +31,14 @@ public class HeaderHandler implements HttpHandler {
         }
 
         HttpRequest modifiedRequest = requestToBeSent;
-        boolean wasModified = false;
 
         for (HeaderConfig config : configList) {
             if (config.isValid()) {
                 modifiedRequest = modifiedRequest.withHeader(config.getName(), config.getValue());
-                wasModified = true;
             }
         }
 
-        if (wasModified) {
-            return RequestToBeSentAction.continueWith(modifiedRequest);
-        }
-        return RequestToBeSentAction.continueWith(requestToBeSent);
+        return RequestToBeSentAction.continueWith(modifiedRequest);
     }
 
     @Override
