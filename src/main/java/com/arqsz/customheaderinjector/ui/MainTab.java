@@ -67,12 +67,10 @@ public class MainTab extends JPanel {
         rowsContainer = new JPanel();
         rowsContainer.setLayout(new BoxLayout(rowsContainer, BoxLayout.Y_AXIS));
 
-        JScrollPane scrollPane = new JScrollPane(new JPanel(new BorderLayout()) {
-            {
-                add(rowsContainer, BorderLayout.NORTH);
-            }
-        });
-        scrollPane.getVerticalScrollBar().setUnitIncrement(16);
+        JPanel innerContainer = new JPanel(new BorderLayout());
+        innerContainer.add(rowsContainer, BorderLayout.NORTH);
+        JScrollPane scrollPane = new JScrollPane(innerContainer);
+
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
 
         JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
