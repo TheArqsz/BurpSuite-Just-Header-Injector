@@ -71,4 +71,9 @@ public class HeaderHandler implements HttpHandler {
     public void setScopeOnly(boolean scopeOnly) {
         this.scopeOnly = scopeOnly;
     }
+    
+    public void replaceConfigs(List<HeaderConfig> newConfigs) {
+        configList.clear();
+        configList.addAll(newConfigs);
+    }
 }

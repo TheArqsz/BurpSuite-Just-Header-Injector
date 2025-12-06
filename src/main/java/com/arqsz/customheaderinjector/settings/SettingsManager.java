@@ -5,15 +5,20 @@ import com.arqsz.customheaderinjector.handler.HeaderHandler;
 import com.arqsz.customheaderinjector.model.HeaderConfig;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import burp.api.montoya.logging.Logging;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SettingsManager {
     private static final String KEY = "header_injector_data";
     private final Preferences preferences;
     private final HeaderHandler handler;
+    private final Logging logging;
 
-    public SettingsManager(Preferences preferences, HeaderHandler handler) {
+    public SettingsManager(Preferences preferences, HeaderHandler handler, Logging logging) {
         this.preferences = preferences;
         this.handler = handler;
+        this.logging = logging;
     }
 
     public void save() {
@@ -47,16 +52,22 @@ public class SettingsManager {
             handler.setGlobalEnabled(root.optBoolean("global", true));
             handler.setScopeOnly(root.optBoolean("scope", false));
 
-            handler.getConfigList().clear();
             JSONArray arr = root.optJSONArray("headers");
             if (arr != null) {
+                List<HeaderConfig> newConfigs = new ArrayList<>();
                 for (int i = 0; i < arr.length(); i++) {
                     JSONObject obj = arr.getJSONObject(i);
-                    handler.getConfigList().add(new HeaderConfig(obj.optString("n"),
-                            obj.optString("v"), obj.optBoolean("e", true)));
+                    newConfigs.add(new HeaderConfig(
+                        obj.optString("n"),
+                        obj.optString("v"),
+                        obj.optBoolean("e", true)
+                    ));
                 }
+                // Atomic replacement
+                handler.replaceConfigs(newConfigs); 
             }
-        } catch (Exception ignored) {
+        } catch (Exception e) {
+            logging.logToError("Failed to load settings: " + e.getMessage());
         }
     }
 }
