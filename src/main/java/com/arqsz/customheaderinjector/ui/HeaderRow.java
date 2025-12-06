@@ -8,6 +8,8 @@ import javax.swing.border.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class HeaderRow extends JPanel {
     private final HeaderConfig config;
@@ -45,12 +47,17 @@ public class HeaderRow extends JPanel {
         txtName = new JTextField(config.getName(), 15);
         defaultBorder = txtName.getBorder();
 
-        SimpleDocListener docListener = () -> {
+        txtName.getDocument().addDocumentListener((SimpleDocListener) () -> {
             config.setName(txtName.getText());
             validateInput();
-            onUpdate.run();
-        };
-        txtName.getDocument().addDocumentListener(docListener);
+        });
+
+        txtName.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                onUpdate.run();
+            }
+        });
 
         c.gridx = 1;
         c.weightx = 0.3;
@@ -63,8 +70,15 @@ public class HeaderRow extends JPanel {
         JTextField txtValue = new JTextField(config.getValue(), 15);
         txtValue.getDocument().addDocumentListener((SimpleDocListener) () -> {
             config.setValue(txtValue.getText());
-            onUpdate.run();
         });
+
+        txtValue.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                onUpdate.run();
+            }
+        });
+
         c.gridx = 3;
         c.weightx = 0.7;
         add(txtValue, c);
