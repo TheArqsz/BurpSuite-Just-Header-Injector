@@ -6,9 +6,9 @@ public class HeaderConfig {
     // RFC 7230 token characters
     public static final Pattern NAME_PATTERN = Pattern.compile("^[a-zA-Z0-9!#$%&'*+.^_`|~-]+$");
 
-    private String name;
-    private String value;
-    private boolean enabled;
+    private volatile String name;
+    private volatile String value;
+    private volatile boolean enabled;
 
     public HeaderConfig(String name, String value, boolean enabled) {
         this.name = name;
