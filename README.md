@@ -1,4 +1,4 @@
-# Burp Suite Custom Header Extension
+# Burp Suite Just Header Extension
 
 A Burp Suite extension that allows you to automatically inject custom HTTP headers into all outgoing requests.
 
@@ -58,7 +58,7 @@ mvn clean package -DskipTests
 
 ## Usage
 
-1. Go to the `Custom Header Injector` tab in Burp Suite.
+1. Go to the `Just Header Injector` tab in Burp Suite.
 2. Click `Add Header` to define a new key-value pair.
 3. Check `Enable globally` to start injecting headers immediately.
 4. (Optional) Check `Include only in-scope requests` if you want headers injected only for targets in your defined Scope.

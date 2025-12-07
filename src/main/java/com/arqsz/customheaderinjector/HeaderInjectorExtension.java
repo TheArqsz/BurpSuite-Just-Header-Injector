@@ -10,7 +10,7 @@ import javax.swing.*;
 
 public class HeaderInjectorExtension implements BurpExtension {
 
-    private String extensionName = "Custom Header Injector";
+    private String extensionName = "Just Header Injector";
 
     @Override
     public void initialize(MontoyaApi api) {

@@ -39,7 +39,7 @@ public class SettingsManager {
 
             preferences.setString(KEY, root.toString());
         } catch (Exception e) {
-            logging.logToError("Custom Header Injector: Failed to save settings - " + e.getMessage());
+            logging.logToError("Just Header Injector: Failed to save settings - " + e.getMessage());
         }
     }
 
