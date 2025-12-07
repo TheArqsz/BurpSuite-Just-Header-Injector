@@ -1,12 +1,12 @@
-# Burp Suite Just Header Extension
+# Burp Suite Extension - Just Header Injector
 
 A Burp Suite extension that allows you to automatically inject custom HTTP headers into all outgoing requests.
 
 ---
 
-*Have you ever wanted to configure custom headers in one place and have them automatically work for every request leaving Burp?*
+*Have you ever wanted to just configure custom headers in one place and have them automatically work for every request leaving Burp?*
 
-This extension solves that problem. Whether you need to add an `Authorization` token, a custom `X-Bug-Bounty` ID or specific environment headers, you can define them once and let the extension handle the injection.
+This extension solves that problem. Whether you need to add an `Authorization` token, a custom `X-Bug-Bounty` ID or specific environment headers, you can define them once and let the extension handle the injection **and nothing else**.
 
 ## Features
 
