@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/TheArqsz/BurpSuite-Just-Header-Injector/compare/v1.0.0...v1.0.1) (2025-12-07)
+
+
+### Bug Fixes
+
+* register extension unloading handler for clean shutdown ([b7bd482](https://github.com/TheArqsz/BurpSuite-Just-Header-Injector/commit/b7bd482b9d1a78b6703a559a2a355329168275de))
+
 ## [1.0.0](https://github.com/TheArqsz/BurpSuite-Just-Header-Injector/compare/v0.1.2...v1.0.0) (2025-12-07)
 
 
