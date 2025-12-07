@@ -22,6 +22,10 @@ public class HeaderInjectorExtension implements BurpExtension {
         SettingsManager settings = new SettingsManager(api.persistence().preferences(), handler, api.logging());
         settings.load();
 
+        api.extension().registerUnloadingHandler(() -> {
+            api.logging().logToOutput("Unloading " + this.extensionName);
+        });
+
         SwingUtilities.invokeLater(() -> {
             MainTab tab = new MainTab(api.userInterface(), handler, settings, this.extensionName);
             api.userInterface().registerSuiteTab(this.extensionName, tab);
