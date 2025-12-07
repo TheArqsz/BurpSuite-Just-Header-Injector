@@ -16,7 +16,9 @@ public class HeaderRow extends JPanel {
     private final Runnable onRemove;
     private final Runnable onUpdate;
     private final JTextField txtName;
+
     private final Border defaultBorder;
+    private final Border errorBorder;
 
     public HeaderRow(UserInterface uiUtils, HeaderConfig config, Runnable onRemove,
             Runnable onUpdate) {
@@ -46,6 +48,17 @@ public class HeaderRow extends JPanel {
 
         txtName = new JTextField(config.getName(), 15);
         defaultBorder = txtName.getBorder();
+
+        Insets i = defaultBorder.getBorderInsets(txtName);
+        errorBorder = new CompoundBorder(
+                new MatteBorder(1, 1, 1, 1, Color.RED),
+                new EmptyBorder(
+                    Math.max(0, i.top - 1),
+                    Math.max(0, i.left - 1),
+                    Math.max(0, i.bottom - 1),
+                    Math.max(0, i.right - 1)
+                )
+        );
 
         txtName.getDocument().addDocumentListener((SimpleDocListener) () -> {
             config.setName(txtName.getText());
@@ -97,10 +110,6 @@ public class HeaderRow extends JPanel {
     }
 
     private void validateInput() {
-        Insets nameInset = defaultBorder.getBorderInsets(txtName);
-        Border errorBorder = new CompoundBorder(new MatteBorder(1, 1, 1, 1, Color.RED),
-                new EmptyBorder(nameInset.top - 1, nameInset.left - 1, nameInset.bottom - 1,
-                        nameInset.right - 1));
         if (txtName.getText().isEmpty()) {
             txtName.setBorder(errorBorder);
             txtName.setToolTipText("Header name cannot be empty");
