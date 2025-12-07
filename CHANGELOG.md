@@ -1,3 +1,11 @@
+## [0.1.2](https://github.com/TheArqsz/BurpSuite-Custom-Header-Extension/compare/v0.1.1...v0.1.2) (2025-12-07)
+
+
+### Bug Fixes
+
+* **handler:** resolve race condition in config reload ([90135b6](https://github.com/TheArqsz/BurpSuite-Custom-Header-Extension/commit/90135b67eaed7b12c9d688cbbbbab7dfa59e0a19))
+* **settings:** log persistence errors ([f905422](https://github.com/TheArqsz/BurpSuite-Custom-Header-Extension/commit/f9054227c339bdf03a76d1191f132f1402e805e1))
+
 ## [0.1.1](https://github.com/TheArqsz/BurpSuite-Custom-Header-Extension/compare/v0.1.0...v0.1.1) (2025-12-06)
 
 
