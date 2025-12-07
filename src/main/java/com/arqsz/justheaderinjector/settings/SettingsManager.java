@@ -1,8 +1,8 @@
-package com.arqsz.customheaderinjector.settings;
+package com.arqsz.justheaderinjector.settings;
 
 import burp.api.montoya.persistence.Preferences;
-import com.arqsz.customheaderinjector.handler.HeaderHandler;
-import com.arqsz.customheaderinjector.model.HeaderConfig;
+import com.arqsz.justheaderinjector.handler.HeaderHandler;
+import com.arqsz.justheaderinjector.model.HeaderConfig;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import burp.api.montoya.logging.Logging;

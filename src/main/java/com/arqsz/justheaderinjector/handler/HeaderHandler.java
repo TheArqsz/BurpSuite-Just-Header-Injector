@@ -1,9 +1,9 @@
-package com.arqsz.customheaderinjector.handler;
+package com.arqsz.justheaderinjector.handler;
 
 import burp.api.montoya.scope.Scope;
 import burp.api.montoya.http.handler.*;
 import burp.api.montoya.http.message.requests.HttpRequest;
-import com.arqsz.customheaderinjector.model.HeaderConfig;
+import com.arqsz.justheaderinjector.model.HeaderConfig;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;

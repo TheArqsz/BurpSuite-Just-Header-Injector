@@ -1,4 +1,4 @@
-package com.arqsz.customheaderinjector.model;
+package com.arqsz.justheaderinjector.model;
 
 import java.util.regex.Pattern;
 

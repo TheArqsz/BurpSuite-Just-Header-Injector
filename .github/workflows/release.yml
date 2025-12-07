@@ -63,16 +63,16 @@ jobs:
         if: ${{ steps.changelog.outputs.skipped == 'false' }}
         id: rename_artifact
         run: |
-          cp ./target/customheaderinjector-*-jar-with-dependencies.jar ./target/customheaderinjector.jar
-          cp ./target/customheaderinjector-*-jar-with-dependencies.jar ./target/customheaderinjector-${{ steps.changelog.outputs.tag }}.jar
+          cp ./target/justheaderinjector-*-jar-with-dependencies.jar ./target/justheaderinjector.jar
+          cp ./target/justheaderinjector-*-jar-with-dependencies.jar ./target/justheaderinjector-${{ steps.changelog.outputs.tag }}.jar
         
       - name: Create GitHub Release
         if: ${{ steps.changelog.outputs.skipped == 'false' }}
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            ./target/customheaderinjector-${{ steps.changelog.outputs.tag }}.jar
-            ./target/customheaderinjector.jar
+            ./target/justheaderinjector-${{ steps.changelog.outputs.tag }}.jar
+            ./target/justheaderinjector.jar
           draft: false
           tag_name: ${{ steps.changelog.outputs.tag }}
           name: ${{ steps.changelog.outputs.tag }}

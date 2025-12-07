@@ -1,9 +1,9 @@
-package com.arqsz.customheaderinjector.ui;
+package com.arqsz.justheaderinjector.ui;
 
 import burp.api.montoya.ui.UserInterface;
-import com.arqsz.customheaderinjector.handler.HeaderHandler;
-import com.arqsz.customheaderinjector.model.HeaderConfig;
-import com.arqsz.customheaderinjector.settings.SettingsManager;
+import com.arqsz.justheaderinjector.handler.HeaderHandler;
+import com.arqsz.justheaderinjector.model.HeaderConfig;
+import com.arqsz.justheaderinjector.settings.SettingsManager;
 
 import javax.swing.*;
 import java.awt.*;

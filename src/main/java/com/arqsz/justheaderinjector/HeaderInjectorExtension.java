@@ -1,10 +1,10 @@
-package com.arqsz.customheaderinjector;
+package com.arqsz.justheaderinjector;
 
 import burp.api.montoya.BurpExtension;
 import burp.api.montoya.MontoyaApi;
-import com.arqsz.customheaderinjector.handler.HeaderHandler;
-import com.arqsz.customheaderinjector.settings.SettingsManager;
-import com.arqsz.customheaderinjector.ui.MainTab;
+import com.arqsz.justheaderinjector.handler.HeaderHandler;
+import com.arqsz.justheaderinjector.settings.SettingsManager;
+import com.arqsz.justheaderinjector.ui.MainTab;
 
 import javax.swing.*;
 
